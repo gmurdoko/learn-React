@@ -3,9 +3,12 @@ import { Component } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import loginForm from "./login";
 import "./App.css";
-import UserCard from "./components/UserCard";
-import IncrementNumber from "./components/increaseNumber";
-import DecrementNumber from "./components/decreaseNumber";
+// import UserCard from "./components/UserCard";
+// import IncrementNumber from "./components/increaseNumber";
+// import DecrementNumber from "./components/decreaseNumber";
+import LoginScreen from "./components/LoginScreen";
+import HomeScreen from "./components/HomeScreen";
+// import Login from "./login.js";
 
 //di eksekusi setelah will mount
 class App extends Component {
@@ -31,61 +34,26 @@ class App extends Component {
     componentDidUpdate(prevProps, prevState) {
         console.log("component Did update");
     }
-    PrintDataFunc = () => {
-        return (
-            <div>
-                <div>ini dari</div>
-                <div>data func</div>
-            </div>
-        );
-    };
 
     state = {
-        number: 1,
-        message: "",
+        isLoggedIn: false,
     };
 
-    alertName = (name) => {
-        return alert(`${name}`);
+    onAuthentication = () => {
+        this.setState({ isLoggedIn: true });
     };
-
+    onLogOut = () => {
+        this.setState({ isLoggedIn: false });
+    };
     render() {
-        return (
-            <div className="App">
-                <UserCard
-                    fromApp={{ name: "Galang", address: "Lampung" }}
-                    dariFunc={this.PrintDataFunc}
-                    popUpAlertName={this.alertName}
-                />
-                <IncrementNumber
-                    increment={this.increment}
-                    number={this.state.number}
-                    message={this.state.message}
-                />
-                <DecrementNumber
-                    decrement={this.decrement}
-                    number={this.state.number}
-                />
-            </div>
-        );
-    }
-    increment = () => {
-        this.setState({
-            number: this.state.number + 1,
-            message: "",
-        });
-    };
-    decrement = () => {
-        if (this.state.number > 0) {
-            this.setState({
-                number: this.state.number - 1,
-            });
+        let currentScreen;
+        if (this.state.isLoggedIn) {
+            currentScreen = <HomeScreen onSignOut={this.onLogOut} />;
         } else {
-            this.setState({
-                message: "angka tidak boleh negatif",
-            });
+            currentScreen = <LoginScreen onAuth={this.onAuthentication} />;
         }
-    };
+        return <div className="App">{currentScreen}</div>;
+    }
 }
 
 export default App;

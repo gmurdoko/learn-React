@@ -6,15 +6,15 @@ import Row from "react-bootstrap/Row";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 // import logo from "./logo.svg";
-// import "./loginForm.css";
+// import "./LoginForm.css";
 // import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 // let number = 1;
 // let hello = "hello good morning";
-function loginForm() {
+function LoginForm() {
     return (
-        <div className="loginForm">
+        <div className="LoginForm">
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand href="#home">
                     <img
@@ -83,4 +83,4 @@ function loginForm() {
 //     return;
 // }
 
-export default loginForm;
+export default LoginForm;
