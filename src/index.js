@@ -8,7 +8,7 @@ import loginForm from "./login";
 ReactDOM.render(
     <React.StrictMode>
         <App />
-        <loginForm />
+        {/* <loginForm /> */}
     </React.StrictMode>,
     document.getElementById("root")
 );
