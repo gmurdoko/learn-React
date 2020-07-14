@@ -5,6 +5,7 @@ import { Component } from "react";
 import "./App.css";
 import UserCard from "./components/UserCard";
 import IncrementNumber from "./components/increaseNumber";
+import DecrementNumber from "./components/decreaseNumber";
 
 //di eksekusi setelah will mount
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
 
     state = {
         number: 1,
+        message: "",
     };
 
     alertName = (name) => {
@@ -50,13 +52,18 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                {/* <UserCard
+                <UserCard
                     fromApp={{ name: "Galang", address: "Lampung" }}
                     dariFunc={this.PrintDataFunc}
                     popUpAlertName={this.alertName}
-                /> */}
+                />
                 <IncrementNumber
                     increment={this.increment}
+                    number={this.state.number}
+                    message={this.state.message}
+                />
+                <DecrementNumber
+                    decrement={this.decrement}
                     number={this.state.number}
                 />
             </div>
@@ -65,7 +72,19 @@ class App extends Component {
     increment = () => {
         this.setState({
             number: this.state.number + 1,
+            message: "",
         });
+    };
+    decrement = () => {
+        if (this.state.number > 0) {
+            this.setState({
+                number: this.state.number - 1,
+            });
+        } else {
+            this.setState({
+                message: "angka tidak boleh negatif",
+            });
+        }
     };
 }
 

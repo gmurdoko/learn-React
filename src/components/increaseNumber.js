@@ -3,7 +3,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class IncrementNumber extends React.Component {
     render() {
-        let { number, increment } = this.props;
+        let { number, increment, message } = this.props;
+        let result;
+        if (message === "") {
+            result = <div>{number}</div>;
+        } else {
+            result = (
+                <div class="alert alert-danger" role="alert">
+                    {message}
+                </div>
+            );
+        }
         return (
             <div style={{ marginTop: 10 }}>
                 <button
@@ -15,7 +25,7 @@ class IncrementNumber extends React.Component {
                 >
                     Plus
                 </button>
-                <span>{number}</span>
+                {result}
             </div>
         );
     }
