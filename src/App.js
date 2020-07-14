@@ -1,58 +1,30 @@
-import React from "react";
-import { Component } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import loginForm from "./login";
+import React, { Component } from "react";
 import "./App.css";
-// import UserCard from "./components/UserCard";
-// import IncrementNumber from "./components/increaseNumber";
-// import DecrementNumber from "./components/decreaseNumber";
-import LoginScreen from "./components/LoginScreen";
-import HomeScreen from "./components/HomeScreen";
-// import Login from "./login.js";
+import MyCard from "./components/myCard";
 
-//di eksekusi setelah will mount
 class App extends Component {
-    //fase:1.Mounting 2.Updating 2.Unmounting
-    //Initiate first
-    //dieksekusi sebelum render #peratma
-    componentWillMount() {
-        console.log("Will called in app");
-    }
-    //dieksekusi setelah render
-    componentDidMount() {
-        console.log("Component Did Mount");
-    }
-    componentWillReceiveProps(newProps) {
-        console.log("Component Will Receive Props");
-    }
-    shouldComponentUpdate(newProps, newState) {
-        return true;
-    }
-    componentWillUpdate(nextProps, nextState) {
-        console.log("Component Will Update");
-    }
-    componentDidUpdate(prevProps, prevState) {
-        console.log("component Did update");
-    }
-
     state = {
-        isLoggedIn: false,
+        data: [],
     };
 
-    onAuthentication = () => {
-        this.setState({ isLoggedIn: true });
+    addCard = () => {
+        let joined = this.state.data.concat(1);
+        this.setState({ data: joined });
     };
-    onLogOut = () => {
-        this.setState({ isLoggedIn: false });
-    };
+
     render() {
-        let currentScreen;
-        if (this.state.isLoggedIn) {
-            currentScreen = <HomeScreen onSignOut={this.onLogOut} />;
-        } else {
-            currentScreen = <LoginScreen onAuth={this.onAuthentication} />;
-        }
-        return <div className="App">{currentScreen}</div>;
+        return (
+            <div className="container mt-5">
+                <button className="btn btn-primary mb-3" onClick={this.addCard}>
+                    <strong>+</strong> ADD
+                </button>
+                <div className="row">
+                    {this.state.data.map((value) => {
+                        return <MyCard value={value} />;
+                    })}
+                </div>
+            </div>
+        );
     }
 }
 
