@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Component } from "react";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import loginForm from "./login";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//di eksekusi setelah will mount
+class App extends Component {
+    //fase:1.Mounting 2.Updating 2.Unmounting
+    //Initiate first
+    //dieksekusi sebelum render #peratma
+    componentWillMount() {
+        console.log("Will called in app");
+    }
+    //dieksekusi setelah render
+    componentDidMount() {
+        console.log("Component Did Mount");
+    }
+    componentWillReceiveProps(newProps) {
+        console.log("Component Will Receive Props");
+    }
+    shouldComponentUpdate(newProps, newState) {
+        return true;
+    }
+    componentWillUpdate(nextProps, nextState) {
+        console.log("Component Will Update");
+    }
+    componentDidUpdate(prevProps, prevState) {
+        console.log("component Did update");
+    }
+    render() {
+        return (
+            <div className="App">
+                <h1>{"Component App"}</h1>
+            </div>
+        );
+    }
 }
 
 export default App;
