@@ -1,0 +1,21 @@
+.white {
+    color: white;
+}
+
+input.transparent-input {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+div.transparent-bg {
+    background-color: rgba(0, 0, 0, 0.644) !important;
+    border: none !important;
+    /* padding: 30px; */
+}
+div.background {
+    height: 100vh;
+    background-position: "center";
+    background-repeat: "no-repeat";
+    background-size: "cover";
+    /* opacity: 0.2; */
+}
