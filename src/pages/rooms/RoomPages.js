@@ -17,14 +17,6 @@ class RoomPage extends Component {
             showDetails: false,
             selectedRoom: {},
             edited: true,
-            // fields: {
-            //     edited: true,
-            //     id: "",
-            //     roomName: "",
-            //     price: "",
-            //     status: "",
-            // },
-            // setInputFocus: React.createRef(),
         };
         //
     }
