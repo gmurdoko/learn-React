@@ -62,7 +62,7 @@ class Nav extends Component {
                     />
                     {routeList}
                     <Route
-                        path="*"
+                        // path="*"
                         render={(props) => {
                             return <Notfound />;
                         }}

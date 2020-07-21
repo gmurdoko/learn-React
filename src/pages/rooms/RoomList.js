@@ -3,7 +3,8 @@ import { Table } from "react-bootstrap/cjs";
 import { Button } from "react-bootstrap";
 class RoomList extends Component {
     render() {
-        let { rooms, deleteRoom, updateRoom, buttonEdit } = this.props;
+        const { rooms, showDetails, showModal, deleteRoom } = this.props;
+        // let { rooms, deleteRoom, updateRoom, buttonEdit } = this.props;
         // console.log("FROM list", rooms);
         let room = rooms.map((room, index) => {
             return (
@@ -13,7 +14,7 @@ class RoomList extends Component {
                     <td>{room.price}</td>
                     <td>{room.status}</td>
                     <td>
-                        <Button
+                        {/* <Button
                             // disabled={!buttonEdit}
                             variant="primary"
                             onClick={(event) => {
@@ -21,11 +22,18 @@ class RoomList extends Component {
                             }}
                         >
                             Edit
+                        </Button> */}
+                        <Button
+                            // disabled={!buttonEdit}
+                            variant="primary"
+                            onClick={(event) => {
+                                showDetails(room);
+                            }}
+                        >
+                            Detail
                         </Button>
                     </td>
                     <td>
-                        {/* {console.log(this.state.tr.key)} */}
-                        <i className="delete">delete</i>
                         <Button
                             variant="primary"
                             onClick={(event) => {
@@ -40,6 +48,14 @@ class RoomList extends Component {
         });
         return (
             <div style={{ marginTop: 10 }}>
+                <Button
+                    variant="primary"
+                    onClick={(event) => {
+                        showModal();
+                    }}
+                >
+                    Tambah
+                </Button>
                 <Table striped bordered hover>
                     <thead>
                         <tr>

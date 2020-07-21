@@ -13,7 +13,7 @@ class LoginForm extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
-        // this.props.onLogin();
+        this.props.onLogin();
     };
     changeHandler = (event) => {
         this.setState({
