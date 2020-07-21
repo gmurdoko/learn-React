@@ -13,6 +13,7 @@ class LoginForm extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
+        // this.props.onLogin();
     };
     changeHandler = (event) => {
         this.setState({
@@ -21,6 +22,7 @@ class LoginForm extends Component {
         });
     };
     render() {
+        // const { onLogin } = this.props;
         return (
             <div class="col-md-12 alert alert-dark transparent-bg">
                 <div className="row col-md-12 justify-content-center">
@@ -38,8 +40,8 @@ class LoginForm extends Component {
                                 name="email"
                                 type="email"
                                 placeholder="Enter email"
-                                autofocus="true"
-                                required="true"
+                                autoFocus={true}
+                                required={true}
                                 onChange={(event) => {
                                     this.changeHandler(event);
                                 }}
@@ -59,7 +61,7 @@ class LoginForm extends Component {
                                 className="transparent-input text-light"
                                 type="password"
                                 placeholder="Password"
-                                required
+                                required={true}
                             />
                             <div className="valid-feedback">Looks good!</div>
                             <div className="invalid-feedback">
@@ -76,7 +78,13 @@ class LoginForm extends Component {
                                 label="Remember me"
                             />
                         </Form.Group>
-                        <Button variant="outline-light" type="submit">
+                        <Button
+                            variant="outline-light"
+                            type="submit"
+                            // onClick={() => {
+                            //     onLogin();
+                            // }}
+                        >
                             Submit
                         </Button>
                     </Form>

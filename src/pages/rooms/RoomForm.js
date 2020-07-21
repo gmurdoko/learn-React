@@ -3,17 +3,19 @@ import { Button, Card, Row, Form, InputGroup, Col } from "react-bootstrap";
 
 class RoomForm extends Component {
     render() {
-        let { handleChange, fields, createRoom } = this.props;
+        let { handleChange, fields, createRoom, inputFocus } = this.props;
         return (
             <Card>
                 <Card.Header>Form Input Room</Card.Header>
                 <Card.Body>
                     <Form
+                        className="needs-validation"
                         onSubmit={(event) => {
                             createRoom(event);
                         }}
+                        noValidate
                     >
-                        <Form.Group as={Row} controlId="formGridEmail">
+                        {/* <Form.Group as={Row} controlId="formGridEmail">
                             <Form.Label column sm={3}>
                                 Room Id
                             </Form.Label>
@@ -25,10 +27,11 @@ class RoomForm extends Component {
                                         handleChange(event, "id");
                                     }}
                                     value={fields["id"]}
-                                    disabled
+                                    disabled={fields["edited"]}
+                                    required="true"
                                 />
                             </Col>
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <Form.Group as={Row} controlId="formGridRoom">
                             <Form.Label column sm={3}>
@@ -43,7 +46,16 @@ class RoomForm extends Component {
                                         handleChange(event, "roomName");
                                     }}
                                     value={fields["roomName"]}
+                                    required="true"
+                                    ref={inputFocus}
+                                    // autoFocus={true}
                                 />
+                                <div className="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div className="invalid-feedback">
+                                    Form can't be empty
+                                </div>
                             </Col>
                         </Form.Group>
 
@@ -63,7 +75,14 @@ class RoomForm extends Component {
                                         handleChange(event, "price");
                                     }}
                                     value={fields["price"]}
+                                    required="true"
                                 />
+                                <div className="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div className="invalid-feedback">
+                                    Form can't be empty
+                                </div>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="formGridRoom">
@@ -79,12 +98,17 @@ class RoomForm extends Component {
                                         handleChange(event, "status");
                                     }}
                                     value={fields["status"]}
-                                    disabled
+                                    disabled={fields["edited"]}
+                                    required="true"
                                 />
                             </Col>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">
+                        <Button
+                            className="float-right"
+                            variant="primary"
+                            type="submit"
+                        >
                             Submit
                         </Button>
                     </Form>

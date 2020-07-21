@@ -6,19 +6,19 @@ class MyNavbar extends Component {
     render() {
         return (
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand as={Link} to="/">
+                <Navbar.Brand as={Link} to="/home">
                     tropusproject
                 </Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/">
+                    <Nav.Link as={Link} to="/home">
                         Home
                     </Nav.Link>
                     <Nav.Link as={Link} to="/list">
                         List
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/login">
+                    {/* <Nav.Link as={Link} to="/login">
                         Login
-                    </Nav.Link>
+                    </Nav.Link> */}
                 </Nav>
             </Navbar>
         );

@@ -12,7 +12,16 @@ const pushRoom = async (data) => {
     return await room;
 };
 
-export { getRooms, pushRoom };
+const delRoom = async (id) => {
+    let room = await axios.delete(`${baseURL}/${id}`);
+    return await room;
+};
+
+const putRoom = async (data) => {
+    let room = await axios.put(baseURL, data);
+    return await room;
+};
+export { getRooms, pushRoom, delRoom, putRoom };
 // import axios from 'axios'
 // export const getProducts = async function () {
 //     let products = await axios.get("http://localhost:3000/products")

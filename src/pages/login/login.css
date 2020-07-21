@@ -13,7 +13,8 @@ div.transparent-bg {
     /* padding: 30px; */
 }
 div.background {
-    height: 100vh;
+    background-image: url("../../files/img/josh-soto-truHgj5kdDA-unsplash.jpg");
+    height: 92vh;
     width: 100%;
     background-position: "center";
     background-repeat: "no-repeat";

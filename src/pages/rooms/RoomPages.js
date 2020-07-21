@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { getRooms, pushRoom } from "../../api/roomsApi/RoomServices";
+import {
+    getRooms,
+    pushRoom,
+    delRoom,
+    putRoom,
+} from "../../api/roomsApi/RoomServices";
 import RoomList from "./RoomList";
 import RoomForm from "./RoomForm";
 class RoomPage extends Component {
@@ -9,11 +14,13 @@ class RoomPage extends Component {
             rooms: [],
             sample: "",
             fields: {
-                // id: "",
+                edited: true,
+                id: "",
                 roomName: "",
                 price: "",
-                // status: "",
+                status: "",
             },
+            setInputFocus: React.createRef(),
         };
         //
     }
@@ -35,45 +42,100 @@ class RoomPage extends Component {
             });
     };
 
-    createRoom = (event) => {
-        event.preventDefault();
-        pushRoom(this.state.fields)
-            .then((res) => {
-                alert("input berhasil");
-                this.setState({
-                    ...this.state,
-                    fields: {
-                        // id: "",
-                        roomName: "",
-                        price: "",
-                        // status: "",
-                    },
-                });
-                this.loadData();
-                console.log(res);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    resetStateFields = () => {
+        this.setState({
+            ...this.state,
+            fields: {
+                edited: true,
+                id: "",
+                roomName: "",
+                price: "",
+                status: "",
+            },
+        });
     };
 
+    createRoom = (event) => {
+        event.preventDefault();
+        event.target.className += " was-validated";
+
+        if (this.state.fields.edited === true) {
+            pushRoom(this.state.fields)
+                .then((res) => {
+                    console.log("result", res);
+                    this.resetStateFields();
+                    alert("input berhasil");
+                    this.loadData();
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        } else {
+            putRoom(this.state.fields)
+                .then((res) => {
+                    this.resetStateFields();
+                    alert("input berhasil");
+                    this.loadData();
+                    // console.log(res);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    };
+    updateRoom = (event, index) => {
+        // this.setInputFocus.current.focus();
+        event.preventDefault();
+        if (this.state.fields.edited === true) {
+            this.setState({
+                ...this.state,
+                fields: {
+                    edited: false,
+                    id: this.state.rooms[index].id,
+                    roomName: this.state.rooms[index].roomName,
+                    price: this.state.rooms[index].price,
+                    status: this.state.rooms[index].status,
+                },
+            });
+        } else {
+            this.resetStateFields();
+        }
+    };
+    deleteRoom = (event, id) => {
+        event.preventDefault();
+        delRoom(id)
+            .then((res) => {
+                alert(`${res} delete berhasil`);
+                this.loadData();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     componentDidMount() {
         this.loadData();
     }
 
     render() {
         return (
-            <div className="row col-md-12 justify-content-center">
-                <div className="col-md-7">
-                    <RoomForm
-                        handleChange={this.handleChange}
-                        fields={this.state.fields}
-                        createRoom={this.createRoom}
-                    />
-                    <RoomList
-                        sample={this.state.sample}
-                        rooms={this.state.rooms}
-                    />
+            <div className="container-fluid">
+                <div className="row col-md-12 justify-content-center">
+                    <div className="col-md-7">
+                        <RoomForm
+                            handleChange={this.handleChange}
+                            fields={this.state.fields}
+                            createRoom={this.createRoom}
+                            inputFocus={this.state.setInputFocus}
+                        />
+                        <RoomList
+                            buttonEdit={this.state.fields.edited}
+                            sample={this.state.sample}
+                            rooms={this.state.rooms}
+                            deleteRoom={this.deleteRoom}
+                            updateRoom={this.updateRoom}
+                        />
+                        {/* {console.log(this.state.rooms)} */}
+                    </div>
                 </div>
             </div>
         );
