@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { times } from "@fortawesome/free-solid-svg-icons";
 import {
     Modal,
     Button,
@@ -24,22 +25,17 @@ class RoomModal extends Component {
         } = this.props;
         return (
             <Modal show={showDetails}>
-                <FontAwesomeIcon
-                    as={Button}
-                    icon={faCoffee}
-                    onClick={() => {
-                        hideDetails();
-                    }}
-                />
-                {/* <Button
-                    icon="fa fa-window-close"
-                    
-                    
-                ></Button> */}
                 <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Detail Room
                     </Modal.Title>
+                    <Button
+                        onClick={() => {
+                            hideDetails();
+                        }}
+                    >
+                        <i className="times" />
+                    </Button>
                 </Modal.Header>
                 <Modal.Body>
                     <Form

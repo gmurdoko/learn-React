@@ -4,7 +4,7 @@ const baseURLs = "/rooms";
 const baseURL = "/room";
 const getRooms = async () => {
     let rooms = await axios.get(baseURLs);
-    // console.log(rooms);
+
     return await rooms;
 };
 const pushRoom = async (data) => {

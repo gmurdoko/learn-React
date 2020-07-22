@@ -3,26 +3,26 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./login.css";
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-        };
-    }
-    submitHandler = (event) => {
-        event.preventDefault();
-        event.target.className += " was-validated";
-        this.props.onLogin();
-    };
-    changeHandler = (event) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.value,
-        });
-    };
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         email: "",
+    //         password: "",
+    //     };
+    // }
+    // submitHandler = (event) => {
+    //     event.preventDefault();
+    //     event.target.className += " was-validated";
+    //     this.props.onLogin();
+    // };
+    // changeHandler = (event) => {
+    //     this.setState({
+    //         ...this.state,
+    //         [event.target.name]: event.target.value,
+    //     });
+    // };
     render() {
-        // const { onLogin } = this.props;
+        const { auth, handleChange, clickLogin } = this.props;
         return (
             <div class="col-md-12 alert alert-dark transparent-bg">
                 <div className="row col-md-12 justify-content-center">
@@ -30,27 +30,29 @@ class LoginForm extends Component {
                 </div>
                 <div className="alert col-md-12 text-right">
                     <Form
-                        className="needs-validation"
-                        onSubmit={this.submitHandler}
+                        className="needs-validation was-validated"
+                        onSubmit={(event) => {
+                            clickLogin(event);
+                        }}
                         noValidate
                     >
-                        <Form.Group controlId="formBasicEmail">
+                        <Form.Group controlId="formBasicUserName">
                             <Form.Control
                                 className="transparent-input text-light"
-                                name="email"
-                                type="email"
-                                placeholder="Enter email"
+                                name="username"
+                                type="text"
+                                placeholder="username"
                                 autoFocus={true}
                                 required={true}
                                 onChange={(event) => {
-                                    this.changeHandler(event);
+                                    handleChange(event, "username");
                                 }}
-                                value={this.state.email}
+                                value={auth["username"]}
                             />
-                            <div className="valid-feedback">Looks good!</div>
+                            {/* <div className="valid-feedback">Looks good!</div>
                             <div className="invalid-feedback">
                                 Email doesn't valid!
-                            </div>
+                            </div> */}
                             {/* <Form.Text className="text-light">
                                 We'll never share your email with anyone else.
                             </Form.Text> */}
@@ -59,14 +61,19 @@ class LoginForm extends Component {
                         <Form.Group controlId="formBasicPassword">
                             <Form.Control
                                 className="transparent-input text-light"
+                                name="password"
                                 type="password"
                                 placeholder="Password"
                                 required={true}
+                                onChange={(event) => {
+                                    handleChange(event, "password");
+                                }}
+                                value={auth["password"]}
                             />
-                            <div className="valid-feedback">Looks good!</div>
+                            {/* <div className="valid-feedback">Looks good!</div>
                             <div className="invalid-feedback">
                                 Password can't be empty
-                            </div>
+                            </div> */}
                         </Form.Group>
                         <Form.Group
                             className="float-left"
