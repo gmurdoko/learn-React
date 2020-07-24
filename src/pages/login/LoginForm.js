@@ -1,28 +1,29 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import "./login.css";
 class LoginForm extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         email: "",
-    //         password: "",
-    //     };
-    // }
-    // submitHandler = (event) => {
-    //     event.preventDefault();
-    //     event.target.className += " was-validated";
-    //     this.props.onLogin();
-    // };
-    // changeHandler = (event) => {
-    //     this.setState({
-    //         ...this.state,
-    //         [event.target.name]: event.target.value,
-    //     });
-    // };
+    constructor(props) {
+        super(props);
+        this.state = {
+            setValidated: false,
+        };
+    }
+    onValidated = (event) => {
+        const form = event.currentTarget;
+        console.log(form);
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            this.props.clickLogin(event);
+            console.log(this.state.validated);
+        }
+        this.setState({ ...this.state, setValidated: true });
+    };
     render() {
-        const { auth, handleChange, clickLogin } = this.props;
+        const { auth, handleChange } = this.props;
         return (
             <div class="col-md-12 alert alert-dark transparent-bg">
                 <div className="row col-md-12 justify-content-center">
@@ -30,35 +31,34 @@ class LoginForm extends Component {
                 </div>
                 <div className="alert col-md-12 text-right">
                     <Form
-                        className="needs-validation was-validated"
-                        onSubmit={(event) => {
-                            clickLogin(event);
-                        }}
                         noValidate
+                        validated={this.state.setValidated}
+                        onSubmit={(event) => {
+                            this.onValidated(event);
+                        }}
                     >
-                        <Form.Group controlId="formBasicUserName">
+                        <Form.Group controlId="validationCustom01">
                             <Form.Control
                                 className="transparent-input text-light"
                                 name="username"
                                 type="text"
-                                placeholder="username"
+                                placeholder="Username"
                                 autoFocus={true}
-                                required={true}
+                                required
                                 onChange={(event) => {
                                     handleChange(event, "username");
                                 }}
                                 value={auth["username"]}
                             />
-                            {/* <div className="valid-feedback">Looks good!</div>
-                            <div className="invalid-feedback">
-                                Email doesn't valid!
-                            </div> */}
-                            {/* <Form.Text className="text-light">
-                                We'll never share your email with anyone else.
-                            </Form.Text> */}
+                            <Form.Control.Feedback>
+                                Looks good!
+                            </Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">
+                                Username can't be empty!
+                            </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group controlId="validationCustom02">
                             <Form.Control
                                 className="transparent-input text-light"
                                 name="password"
@@ -70,10 +70,12 @@ class LoginForm extends Component {
                                 }}
                                 value={auth["password"]}
                             />
-                            {/* <div className="valid-feedback">Looks good!</div>
-                            <div className="invalid-feedback">
-                                Password can't be empty
-                            </div> */}
+                            <Form.Control.Feedback>
+                                Looks good!
+                            </Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">
+                                Password can't be empty!
+                            </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group
                             className="float-left"
@@ -85,13 +87,7 @@ class LoginForm extends Component {
                                 label="Remember me"
                             />
                         </Form.Group>
-                        <Button
-                            variant="outline-light"
-                            type="submit"
-                            // onClick={() => {
-                            //     onLogin();
-                            // }}
-                        >
+                        <Button variant="outline-light" type="submit">
                             Submit
                         </Button>
                     </Form>

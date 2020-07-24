@@ -5,11 +5,9 @@ import LoginPages from "../../pages/login/LoginPages";
 import HomePage from "../../pages/home/HomePage";
 import Notfound from "../../pages/home/HomePage";
 import MyNavbar from "../navigate/MyNavbar";
-import UserPages from "../../pages/user/UserPages";
 const routes = [
     { id: 1, path: "/home", component: HomePage },
-    { id: 2, path: "/users", component: UserPages },
-    // { id: 2, path: "/list", component: RoomPage },
+    { id: 2, path: "/list", component: RoomPage },
 ];
 class Nav extends Component {
     constructor(props) {
@@ -19,39 +17,24 @@ class Nav extends Component {
             auth: false,
         };
     }
-    onLogin = (token) => {
-        // localStorage.setItem("auth-token", token);
-        sessionStorage.setItem("auth-token", token);
-        this.setState({ ...this.state, auth: true });
+    onLogin = () => {
+        this.setState({
+            auth: true,
+        });
         this.props.history.push({ pathname: "/home" });
     };
     onLogout = () => {
-        // localStorage.removeItem("auth-token");
-        sessionStorage.removeItem("auth-token");
         this.setState({
             auth: false,
         });
+        this.props.history.push({
+            pathname: "/",
+        });
     };
-    componentDidMount() {
-        if (sessionStorage.getItem("auth-token") !== null) {
-            this.setState({
-                ...this.state,
-                auth: true,
-            });
-            // <route.component {...props} />;
-            this.props.history.push({ pathname: this.props.location.pathname });
-            // this.props.routeList;
-        } else {
-            this.setState({ ...this.state, auth: false });
-        }
-    }
-
     render() {
-        const isLoggedIn = this.state.auth;
         const routeList = routes.map((route) => {
             return (
                 <Route
-                    // exact
                     key={route.id}
                     path={route.path}
                     render={(props) => {
@@ -66,12 +49,7 @@ class Nav extends Component {
         });
         return (
             <div>
-                {isLoggedIn ? (
-                    <MyNavbar onLogout={this.onLogout} auth={this.state.auth} />
-                ) : (
-                    ""
-                )}
-
+                <MyNavbar />
                 <Switch>
                     <Route
                         path="/"
@@ -84,8 +62,7 @@ class Nav extends Component {
                     />
                     {routeList}
                     <Route
-                        // exact
-                        path="*"
+                        // path="*"
                         render={(props) => {
                             return <Notfound />;
                         }}

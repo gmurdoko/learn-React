@@ -11,6 +11,7 @@ class LoginPages extends Component {
 
         //
     }
+
     handleChange = (event, field) => {
         let { auth } = this.state;
         auth[field] = event.target.value;
@@ -22,16 +23,15 @@ class LoginPages extends Component {
         pushAuth(this.state.auth)
             .then((res) => {
                 console.log(res);
-                if (res.data.token !== null) {
-                    sessionStorage.setItem("auth-token", res.data.token);
-                    this.props.onLogin();
-                    this.resetAuth();
-                } else {
-                    alert("Username atau Password salah!");
+                if (res.data !== null) {
+                    // sessionStorage.setItem("auth-token", res.data.token);
+                    this.props.onLogin(res.data);
                     this.resetAuth();
                 }
             })
             .catch((error) => {
+                alert("Username atau Password salah!");
+                this.resetAuth();
                 console.error(error);
             });
     };

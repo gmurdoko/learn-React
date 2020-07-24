@@ -17,24 +17,39 @@ class Nav extends Component {
             auth: false,
         };
     }
-    onLogin = () => {
-        this.setState({
-            auth: true,
-        });
+    onLogin = (token) => {
+        // localStorage.setItem("auth-token", token);
+        sessionStorage.setItem("auth-token", token);
+        this.setState({ ...this.state, auth: true });
         this.props.history.push({ pathname: "/home" });
     };
     onLogout = () => {
+        // localStorage.removeItem("auth-token");
+        sessionStorage.removeItem("auth-token");
         this.setState({
             auth: false,
         });
-        this.props.history.push({
-            pathname: "/",
-        });
     };
+    componentDidMount() {
+        if (sessionStorage.getItem("auth-token") !== null) {
+            this.setState({
+                ...this.state,
+                auth: true,
+            });
+            // <route.component {...props} />;
+            this.props.history.push({ pathname: this.props.location.pathname });
+            // this.props.routeList;
+        } else {
+            this.setState({ ...this.state, auth: false });
+        }
+    }
+
     render() {
+        const isLoggedIn = this.state.auth;
         const routeList = routes.map((route) => {
             return (
                 <Route
+                    // exact
                     key={route.id}
                     path={route.path}
                     render={(props) => {
@@ -49,7 +64,12 @@ class Nav extends Component {
         });
         return (
             <div>
-                <MyNavbar />
+                {isLoggedIn ? (
+                    <MyNavbar onLogout={this.onLogout} auth={this.state.auth} />
+                ) : (
+                    ""
+                )}
+
                 <Switch>
                     <Route
                         path="/"
@@ -62,7 +82,8 @@ class Nav extends Component {
                     />
                     {routeList}
                     <Route
-                        // path="*"
+                        // exact
+                        path="*"
                         render={(props) => {
                             return <Notfound />;
                         }}

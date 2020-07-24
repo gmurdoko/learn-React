@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-const productURLs = "/products";
+const userURLs = "/users";
 const authURL = "/auth";
 
 const pushAuth = async (data) => {
@@ -8,10 +8,10 @@ const pushAuth = async (data) => {
     return await token;
 };
 
-const getProducts = async () => {
-    let rooms = await axios.get(productURLs);
+const getUsers = async (token) => {
+    let users = await axios.get(userURLs, { headers: { "auth-token": token } });
 
-    return await rooms;
+    return await users;
 };
 
 // const pushRoom = async (data) => {
@@ -28,4 +28,4 @@ const getProducts = async () => {
 //     let room = await axios.put(baseURL, data);
 //     return await room;
 // };
-export { pushAuth, getProducts };
+export { pushAuth, getUsers };

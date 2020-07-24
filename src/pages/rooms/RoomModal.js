@@ -37,14 +37,14 @@ class RoomModal extends Component {
                         <i className="times" />
                     </Button>
                 </Modal.Header>
-                <Modal.Body>
-                    <Form
-                        className="needs-validation"
-                        onSubmit={(event) => {
-                            createRoom(event);
-                        }}
-                        noValidate
-                    >
+                <Form
+                    className="needs-validation"
+                    onSubmit={(event) => {
+                        createRoom(event);
+                    }}
+                    noValidate
+                >
+                    <Modal.Body>
                         {/* <Form.Group as={Row} controlId="formGridEmail">
                             <Form.Label column sm={3}>
                                 Room Id
@@ -133,17 +133,17 @@ class RoomModal extends Component {
                                 />
                             </Col>
                         </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button
-                        className="float-right"
-                        variant="primary"
-                        type="submit"
-                    >
-                        Submit
-                    </Button>
-                </Modal.Footer>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button
+                            className="float-right"
+                            variant="primary"
+                            type="submit"
+                        >
+                            Submit
+                        </Button>
+                    </Modal.Footer>
+                </Form>
             </Modal>
         );
     }

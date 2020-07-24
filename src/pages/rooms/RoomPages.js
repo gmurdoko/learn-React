@@ -52,7 +52,8 @@ class RoomPage extends Component {
     };
 
     loadData = () => {
-        getRooms()
+        let token = sessionStorage.getItem("auth-token");
+        getRooms(token)
             .then((rooms) => {
                 // console.log(rooms);
                 if (rooms.data.status === 200) {
@@ -67,9 +68,10 @@ class RoomPage extends Component {
     createRoom = (event) => {
         event.preventDefault();
         event.target.className += " was-validated";
+        let token = sessionStorage.getItem("auth-token");
 
         if (this.state.edited === true) {
-            pushRoom(this.state.selectedRoom)
+            pushRoom(this.state.selectedRoom, token)
                 .then((res) => {
                     if (res.data.status === 202) {
                         console.log("result", res);
@@ -82,7 +84,7 @@ class RoomPage extends Component {
                     console.error(error);
                 });
         } else {
-            putRoom(this.state.selectedRoom)
+            putRoom(this.state.selectedRoom, token)
                 .then((res) => {
                     if (res.data.status === 202) {
                         this.hideDetails();
@@ -109,7 +111,8 @@ class RoomPage extends Component {
     };
     deleteRoom = (event, id) => {
         event.preventDefault();
-        delRoom(id)
+        let token = sessionStorage.getItem("auth-token");
+        delRoom(id, token)
             .then((res) => {
                 if (res.data.status === 202) {
                     alert(`${res} delete berhasil`);

@@ -7,11 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
-const customHistory = createBrowserHistory();
+// const customHistory = createBrowserHistory();
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router history={customHistory}>
+        <Router history={createBrowserHistory()}>
             <App />
         </Router>
     </React.StrictMode>,
