@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
-import Nav2 from "./components/router/Nav2";
+// import Nav2 from "./components/router/Nav2";
 import Nav from "./components/router/Nav";
-import Hoc from "./container/Hoc";
-import HocComponent from "./challengeHoc/hocComponent";
+// import Hoc from "./container/Hoc";
+// import HocComponent from "./challengeHoc/hocComponent";
 
 // import SamplePropTypes from "./components/SamplePropTypes";
 

@@ -2,15 +2,7 @@ import React, { Component } from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { times } from "@fortawesome/free-solid-svg-icons";
-import {
-    Modal,
-    Button,
-    Card,
-    Row,
-    Form,
-    InputGroup,
-    Col,
-} from "react-bootstrap";
+import { Modal, Button, Row, Form, Col } from "react-bootstrap";
 
 class RoomModal extends Component {
     render() {

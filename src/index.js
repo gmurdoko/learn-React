@@ -7,13 +7,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import { Provider } from "react-redux";
+import { store } from "./redux/store-config/store";
 // const customHistory = createBrowserHistory();
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router history={createBrowserHistory()}>
-            <App />
-        </Router>
+        <Provider store={store}>
+            <Router history={createBrowserHistory()}>
+                <App />
+            </Router>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );

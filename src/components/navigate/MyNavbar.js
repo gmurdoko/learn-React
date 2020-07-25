@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import { Navbar, Nav, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 
 class MyNavbar extends Component {
     render() {

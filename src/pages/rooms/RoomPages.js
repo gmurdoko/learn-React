@@ -6,14 +6,15 @@ import {
     putRoom,
 } from "../../api/roomsApi/RoomServices";
 import RoomList from "./RoomList";
-import RoomForm from "./RoomForm";
+// import RoomForm from "./RoomForm";
 import RoomModal from "./RoomModal";
+import { connect } from "react-redux";
 class RoomPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rooms: [],
-            sample: "",
+            // rooms: [],
+            // sample: "",
             showDetails: false,
             selectedRoom: {},
             edited: true,
@@ -55,9 +56,11 @@ class RoomPage extends Component {
         let token = sessionStorage.getItem("auth-token");
         getRooms(token)
             .then((rooms) => {
-                // console.log(rooms);
+                console.log("ini get rooms", rooms.data.status);
                 if (rooms.data.status === 200) {
-                    this.setState({ ...this.state, rooms: rooms.data.result });
+                    this.props.getRooms(rooms.data.result);
+
+                    // this.setState({ ...this.state, rooms: rooms.data.result });
                 }
             })
             .catch((error) => {
@@ -103,7 +106,7 @@ class RoomPage extends Component {
         if (this.state.edited === true) {
             this.setState({
                 ...this.state,
-                selectedRoom: this.state.rooms[index],
+                selectedRoom: this.props.rooms[index],
             });
         } else {
             this.hideDetails();
@@ -125,6 +128,7 @@ class RoomPage extends Component {
     };
     componentDidMount() {
         this.loadData();
+        console.log("ininih", this.props.rooms);
     }
 
     render() {
@@ -141,7 +145,7 @@ class RoomPage extends Component {
                         <RoomList
                             // buttonEdit={this.state.fields.edited}
                             showModal={this.showModal}
-                            rooms={this.state.rooms}
+                            rooms={this.props.rooms}
                             showDetails={this.showDetails}
                             deleteRoom={this.deleteRoom}
                             // updateRoom={this.updateRoom}
@@ -155,11 +159,28 @@ class RoomPage extends Component {
                             edited={this.state.edited}
                         />
 
-                        {/* {console.log(this.state.rooms)} */}
+                        {/* {console.log(this.props.rooms)} */}
                     </div>
                 </div>
             </div>
         );
     }
 }
-export default RoomPage;
+
+const mapStateToProps = (state) => {
+    console.log("mapState", state);
+    return {
+        rooms: state.rooms,
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getRooms: (rooms) => {
+            dispatch({
+                type: "GET_ROOMS",
+                rooms: rooms,
+            });
+        },
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
