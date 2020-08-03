@@ -1,6 +1,6 @@
 import { createStore } from "redux";
-import { RoomReducer } from "../reducers/RoomReducer";
+import { ExchangeReducer } from "../reducers/ExchangeReducer";
 
-const store = createStore(RoomReducer);
+const store = createStore(ExchangeReducer);
 
 export { store };

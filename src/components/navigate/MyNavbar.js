@@ -4,30 +4,17 @@ import { Navbar, Nav } from "react-bootstrap";
 
 class MyNavbar extends Component {
     render() {
-        const { onLogout, auth } = this.props;
         return (
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to="/home">
-                    tropusproject
+                    EX Rates
                 </Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/home" disabled={!auth}>
+                    <Nav.Link as={Link} to="/home">
                         Home
                     </Nav.Link>
-                    <Nav.Link as={Link} to="/list" disabled={!auth}>
-                        Rooms
-                    </Nav.Link>
-                    {/* <Nav.Link as={Link} to="/users" disabled={!auth}>
-                        Users
-                    </Nav.Link> */}
-                    <Nav.Link
-                        // as={Button}
-                        onClick={() => {
-                            onLogout();
-                        }}
-                        disabled={!auth}
-                    >
-                        Logout
+                    <Nav.Link as={Link} to="/list">
+                        Exchanges
                     </Nav.Link>
                 </Nav>
             </Navbar>

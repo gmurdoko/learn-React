@@ -2,7 +2,7 @@ const initialState = {
     rooms: [],
 };
 
-const RoomReducer = (state = initialState, action) => {
+const ExchangeReducer = (state = initialState, action) => {
     switch (action.type) {
         case "GET_ROOMS":
             return {
@@ -14,4 +14,4 @@ const RoomReducer = (state = initialState, action) => {
     }
 };
 
-export { RoomReducer };
+export { ExchangeReducer };

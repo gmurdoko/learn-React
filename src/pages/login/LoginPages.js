@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
 import "./login.css";
-import { pushAuth } from "../../api/challengeApi/api";
+// import { pushAuth } from "../../api/challengeApi/api";
 class LoginPages extends Component {
     constructor(props) {
         super(props);
